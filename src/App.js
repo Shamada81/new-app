@@ -1,25 +1,90 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter, NavLink, Route} from "react-router-dom";
+
+const Menu = ()=>{
+  return <ul>
+    <li><NavLink className="nav-link" to="/profile">Профиль</NavLink></li>
+    <li><NavLink className="nav-link" to="/settings">Настройки</NavLink></li>
+    <li><NavLink className="nav-link" to="/users">Пользователи</NavLink></li>
+  </ul>
+}
+
+const Profile = ()=>{
+  return <div className="row">
+    <div className="col-2">
+      <img width="100%" src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png" alt=""/>
+    </div>
+    <div className="col-10">
+      <h1>Иван Иванов</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet deserunt facilis maxime, porro praesentium qui quibusdam quod, ratione recusandae sapiente soluta vel. Aliquid fugit labore laudantium minima molestias repellat suscipit!</p>
+    </div>
+  </div>
+}
+
+const Settings = ()=>{
+  return <div className="container">
+            <div className="row" id="name">
+              <p>Иван</p>
+              <span style={{color: "blue", padding: "6px"}} className="edit-name"> Изменить</span>
+            </div>
+            <div className="row" id="lastname">
+              <p>Иванов</p>
+              <span style={{color: "blue", padding: "6px"}} className="edit-lastname"> Изменить</span>
+            </div>
+        </div>
+}
+
+const Users = ()=>{
+  return <table className="table">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Имя</th>
+      <th scope="col">Фамилия</th>
+      <th scope="col">Username</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Иван</td>
+      <td>Иванов</td>
+      <td>@ivanko</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Петр</td>
+      <td>Петров</td>
+      <td>@petro</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Василий</td>
+      <td>Васильев</td>
+      <td>@vaska</td>
+    </tr>
+    </tbody>
+  </table>
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="container-fluid">
+        <BrowserRouter>
+          <div className="row">
+            <div className="col-3">
+              <Menu/>
+            </div>
+            <div className="col-9">
+              <Route path="/profile" render={()=>{return <Profile/>}}/>
+              <Route path="/settings" render={()=>{return <Settings/>}}/>
+              <Route path="/users" render={()=>{return <Users/>}}/>
+            </div>
+          </div>
+        </BrowserRouter>
+      </div>
   );
 }
 
